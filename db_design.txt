@@ -1,0 +1,74 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table city {
+  id integer
+  name integer
+  created_at timestamp
+}
+
+Table city_parcel {
+  id integer
+  name varchar
+  city_id integer
+}
+
+Table company {
+  id integer
+  name varchar
+}
+
+Table company_city_parcel {
+  id integer
+  city_parcel_id integer
+  company_id integer
+}
+
+Table resident {
+  id integer
+  name varchar
+  city_id integer
+  created_date timestamp
+}
+
+Table resident_order {
+  id integer
+  resident_id integer
+  budget integer
+  valid_till timestamp
+  deactivated_date timestamp [null]
+  reset_date timestamp
+  created_date timestamp
+  updated_date timestamp
+}
+
+Table resident_city {
+  id integer
+  resident_id integer
+  city_id integer
+  created_date timestamp
+}
+
+Table resident_company_booking {
+  id integer
+  resident_id integer
+  company_id integer
+  resident_order_id integer
+  booking_datetime timestamp
+}
+
+Ref: city_parcel.city_id > city.id
+
+Ref: company.id > company_city_parcel.company_id
+
+Ref: company_city_parcel.city_parcel_id > city_parcel.id
+
+Ref: resident.city_id > resident_city.id
+
+Ref: resident_city.city_id > city.id
+
+Ref: resident_company_booking.company_id > company.id
+
+Ref: resident_company_booking.resident_id > resident.id
+
+Ref: resident_company_booking.resident_order_id > resident_order.id
