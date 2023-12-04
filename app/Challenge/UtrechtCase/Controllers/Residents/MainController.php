@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Collection;
 
 final class MainController extends BaseController implements CanListInterface
 {
@@ -23,7 +24,7 @@ final class MainController extends BaseController implements CanListInterface
     ) {
     }
 
-    public function list(Request $request): array
+    public function list(Request $request): Collection
     {
         return $this->residentsService->listResidents(
             $request->get('limit'),
